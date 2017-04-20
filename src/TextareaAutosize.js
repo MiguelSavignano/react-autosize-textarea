@@ -119,7 +119,7 @@ export default class TextareaAutosize extends React.Component {
   }
 
   onInnerRef = (ref) => {
-    if (this.props.ref) { this.props.ref(ref);}
+    if (this.props.ref) { this.props.innerRef(ref);}
     this.textarea = ref;
   }
 
