@@ -1,8 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TextareaAutosize from '../src/TextareaAutosize';
+import withAutosize from '../src/AutosizeHOC';
+
+const MyTextarea = ({ autosizeRef, ...options }) => (
+  <textarea className='my_custon_texarea' {...options} ref={autosizeRef} />
+);
+
+const MyTextareaAutosize = withAutosize(MyTextarea);
 
 class Example extends React.Component {
+
+  componentDidMount() {
+    this.my_textarea.focus();
+    // document.querySelector("#my-textarea").focus();
+  }
 
   textareaStyle = {
     width: 300,
@@ -19,6 +31,11 @@ class Example extends React.Component {
   render() {
     return (
       <div style={{ fontFamily: 'sans-serif', margin: 15 }}>
+        <h2>MyTextarea</h2>
+        <MyTextareaAutosize
+          autosizeRef={ref => this.my_textarea = ref}
+          placeholder='My hoc textarea'
+        />
         <h2>{'Plain "<TextareaAutosize />"'}</h2>
         <TextareaAutosize
           style={this.textareaStyle}
